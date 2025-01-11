@@ -2,15 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const buttons = document.querySelectorAll('.computer');
     const computerIdElement = document.getElementById('computer-id'); 
     const computerStatusElement = document.getElementById('computer-status');
-    let selectedButton = null; // Track the currently selected button
+    let selectedButton = null;
 
-    // Ensure the computer details elements exist
-    if (!computerIdElement || !computerStatusElement) {
-        console.error('Missing computer details elements in the HTML.');
-        return;
-    }
-
-    // Define the statuses for computers
     const computerStatuses = {
         pc1: 'online',
         pc2: 'offline',
@@ -19,13 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
         pc5: 'offline',
     };
 
-    // Update the status color for a computer
     const updateStatus = (id, status) => {
         const button = document.getElementById(id);
-        if (!button) {
-            console.error(`Button with id "${id}" not found.`);
-            return;
-        }
+        if (!button) return;
 
         if (status === 'online') {
             button.style.fill = 'lightgreen';
@@ -44,23 +33,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle computer click events
     buttons.forEach((button) => {
         button.addEventListener('click', () => {
-            // Deselect the previously selected button
             if (selectedButton) {
                 selectedButton.style.stroke = 'none';
             }
 
-            // Highlight the selected button
             selectedButton = button;
             selectedButton.style.stroke = 'blue';
             selectedButton.style.strokeWidth = '2';
 
-            // Update the computer details section
             const status = computerStatuses[button.id];
             if (status) {
                 computerIdElement.textContent = button.id;
                 computerStatusElement.textContent = status;
-            } else {
-                console.error(`Status for "${button.id}" not found.`);
             }
         });
     });
@@ -83,4 +67,21 @@ document.addEventListener('DOMContentLoaded', () => {
             tooltip.style.display = 'none';
         });
     });
+
+    // Simulate dynamic status updates
+    setInterval(() => {
+        const statuses = ['online', 'offline', 'error'];
+        const getRandomStatus = () => statuses[Math.floor(Math.random() * statuses.length)];
+
+        Object.keys(computerStatuses).forEach((id) => {
+            const newStatus = getRandomStatus();
+            computerStatuses[id] = newStatus;
+            updateStatus(id, newStatus);
+
+            // If the selected computer's status changes, update the details panel
+            if (selectedButton && selectedButton.id === id) {
+                computerStatusElement.textContent = newStatus;
+            }
+        });
+    }, 5000); // Updates every 5 seconds
 });

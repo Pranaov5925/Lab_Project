@@ -1,27 +1,56 @@
 body {
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
     background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
 }
 
-#svg-layout {
-    width: 90%;
+.info {
+    max-width: 35%;
+    text-align: left;
+    flex: 1;
+}
+
+.details {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: left;
+}
+
+svg {
+    width: auto;
     height: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
 }
 
 .computer {
-    fill: lightgreen;
     cursor: pointer;
-    transition: fill 0.3s ease;
+    transition: fill 0.3s ease, stroke 0.3s ease;
 }
 
 .computer:hover {
-    cursor: pointer;
-    stroke: yellow; /* Outline on hover */
+    fill: yellowgreen;
 }
 
 .tooltip {
@@ -31,28 +60,62 @@ body {
     border-radius: 4px;
     padding: 5px;
     font-size: 12px;
-    display: none; /* Hidden by default */
+    display: none;
     pointer-events: none;
     z-index: 10;
 }
 
-
-svg {
-    max-width: 100%;
-    height: auto;
-    margin: 20px;
-}
-
-.info {
+.login-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    margin: 10px;
 }
 
-.details {
-    margin-top: 20px;
+.login-container h1 {
+    margin-bottom: 20px;
+}
+
+.login-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.login-container input {
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    font-size: 16px;
 }
+
+.login-container button {
+    padding: 10px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack elements vertically */
+        align-items: center;
+    }
+
+    svg,
+    .info {
+        max-width: 100%; /* Full width for smaller screens */
+    }
+}
+
